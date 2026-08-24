@@ -5,7 +5,7 @@ per participant, and reveals all accepted answers with group statistics.
 
 ## Local setup
 
-1. Install Python 3.12.4.
+1. Install Python 3.12.
 2. Create and activate a virtual environment.
 3. Install dependencies:
 
@@ -43,5 +43,5 @@ Never commit `.env` or the SQLite database.
 
 No public domain is required because the bot uses Telegram long polling.
 
-Railway reads `.python-version` and uses Python 3.12.4, matching the version
-used to develop and test this bot.
+Railway reads `.python-version` and uses an explicitly pinned Python 3.12
+security release that is compatible with this bot's dependencies.
