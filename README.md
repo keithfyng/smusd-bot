@@ -28,8 +28,8 @@ Never commit `.env` or the SQLite database.
 - `/addquestion` — add a question to the queue
 - `/queue` — view queued questions
 - `/stats` or `/stats <id>` — view voting statistics
-- `/testpost` — immediately post the next queued question
-- `/testreveal` — immediately reveal the latest unrevealed question
+- `/post` — immediately post the next queued question
+- `/reveal` — immediately reveal the latest unrevealed question
 
 ## Railway deployment
 

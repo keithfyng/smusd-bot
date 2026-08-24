@@ -26,8 +26,8 @@ from handlers import (
     start,
     stats_command,
     vote_callback,
-    testpost_command,
-    testreveal_command,
+    post_command,
+    reveal_command,
 )
 from scheduler import setup_scheduler
 
@@ -86,8 +86,8 @@ def main():
     app.add_handler(CommandHandler("queue", queue_command))
     app.add_handler(CommandHandler("stats", stats_command))
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("testpost", testpost_command))
-    app.add_handler(CommandHandler("testreveal", testreveal_command))
+    app.add_handler(CommandHandler("post", post_command))
+    app.add_handler(CommandHandler("reveal", reveal_command))
 
     logger.info("Polling for updates…")
     app.run_polling(drop_pending_updates=True)

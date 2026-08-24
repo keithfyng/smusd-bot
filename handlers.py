@@ -287,9 +287,9 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text("\n".join(lines), parse_mode="Markdown")
 
-# ─── /testpost and /testreveal (testing only) ────────────────────────────────
+# ─── Manual posting and revealing ────────────────────────────────────────────
 
-async def testpost_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def post_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Manually trigger posting the next question right now."""
     if not await admin_only(update):
         return
@@ -304,7 +304,7 @@ async def testpost_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("✅ Question posted to the group!")
 
 
-async def testreveal_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def reveal_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Manually trigger revealing the latest unrevealed question right now."""
     if not await admin_only(update):
         return
@@ -312,7 +312,7 @@ async def testreveal_command(update: Update, context: ContextTypes.DEFAULT_TYPE)
     from scheduler import _reveal_question
     unrevealed = await db.get_latest_unrevealed_question()
     if not unrevealed:
-        await update.message.reply_text("No unrevealed question found. Post one first with /testpost.")
+        await update.message.reply_text("No unrevealed question found. Post one first with /post.")
         return
 
     await _reveal_question(context, unrevealed)
