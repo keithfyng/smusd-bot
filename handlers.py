@@ -28,7 +28,7 @@ async def admin_only(update: Update) -> bool:
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "👋 I'm your trivia bot!\n\n"
-        "I post a daily quiz question to the group and reveal the answer the next morning.\n\n"
+        "I post a daily quiz question to the group and reveal the answer the next day.\n\n"
         "*Admin commands (DM me):*\n"
         "/addquestion — add a question to the queue\n"
         "/queue — view upcoming questions\n"
@@ -210,7 +210,7 @@ async def vote_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await _answer_vote_query(
         query,
-        f"Voted {OPTION_LABELS[chosen_index]})! Answer reveals tomorrow morning. 🕘"
+        f"Voted {OPTION_LABELS[chosen_index]})! Answer reveals tomorrow at noon. 🕛"
     )
 
 # ─── /queue ───────────────────────────────────────────────────────────────────

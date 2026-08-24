@@ -28,7 +28,7 @@ def setup_scheduler(application):
 
 async def daily_job(context):
     """
-    Runs every morning at QUESTION_TIME:
+    Runs daily at QUESTION_TIME:
       1. Reveal yesterday's answer (if any)
       2. Post today's question (if any in queue)
     """
@@ -65,7 +65,7 @@ async def _post_question(context, question):
     text = (
         "🧠 *Daily Trivia!*\n\n"
         f"{question['question']}\n\n"
-        "_Vote below — answer reveals tomorrow morning!_"
+        "_Vote below — answer reveals tomorrow at noon!_"
     )
 
     msg = await context.bot.send_message(
