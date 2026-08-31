@@ -9,8 +9,8 @@ def build_question_keyboard(question_id: int, options: list) -> InlineKeyboardMa
     """
     buttons = []
 
-    for i, option in enumerate(options):
-        label = f"{OPTION_LABELS[i]})  {option}"
+    for i, _option in enumerate(options):
+        label = OPTION_LABELS[i]
         buttons.append([
             InlineKeyboardButton(label, callback_data=f"vote_{question_id}_{i}")
         ])
@@ -25,11 +25,11 @@ def build_revealed_keyboard(question_id: int, options: list, correct_indices: li
     total = sum(vote_counts.values())
     buttons = []
 
-    for i, option in enumerate(options):
+    for i, _option in enumerate(options):
         marker = "✅" if i in correct_indices else "❌"
         count  = vote_counts.get(i, 0)
         pct    = round((count / total) * 100) if total > 0 else 0
-        label  = f"{marker} {OPTION_LABELS[i]})  {option}   {count} ({pct}%)"
+        label  = f"{marker} {OPTION_LABELS[i]} — {count} ({pct}%)"
         # Keep callback data so clicks don't error, but vote_callback handles already-voted
         buttons.append([
             InlineKeyboardButton(label, callback_data=f"vote_{question_id}_{i}")

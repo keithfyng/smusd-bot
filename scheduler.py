@@ -2,6 +2,7 @@ import json
 import logging
 import pytz
 from datetime import time
+from html import escape
 
 from config import GROUP_CHAT_ID, ADMIN_USER_ID, QUESTION_TIME, TIMEZONE
 from constants import OPTION_LABELS
@@ -57,22 +58,31 @@ async def daily_job(context):
 
 # ─── Post a question ──────────────────────────────────────────────────────────
 
+def format_question_text(question: str, options: list[str]) -> str:
+    """Build a question post with every option visible outside the keyboard."""
+    option_lines = "\n".join(
+        f"{OPTION_LABELS[i]}) {escape(option)}"
+        for i, option in enumerate(options)
+    )
+    return (
+        "🧠 <b>Daily Trivia!</b>\n\n"
+        f"{escape(question)}\n\n"
+        f"{option_lines}\n\n"
+        "<i>Vote below — answer reveals tomorrow at noon!</i>"
+    )
+
+
 async def _post_question(context, question):
     options = json.loads(question["options"])
 
     keyboard = build_question_keyboard(question["id"], options)
-
-    text = (
-        "🧠 *Daily Trivia!*\n\n"
-        f"{question['question']}\n\n"
-        "_Vote below — answer reveals tomorrow at noon!_"
-    )
+    text = format_question_text(question["question"], options)
 
     msg = await context.bot.send_message(
         chat_id=GROUP_CHAT_ID,
         text=text,
         reply_markup=keyboard,
-        parse_mode="Markdown",
+        parse_mode="HTML",
     )
 
     await db.mark_question_sent(question["id"], msg.message_id)

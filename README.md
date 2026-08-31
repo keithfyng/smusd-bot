@@ -3,6 +3,14 @@
 A Telegram trivia bot that queues multiple-choice questions, records one vote
 per participant, and reveals all accepted answers with group statistics.
 
+## Features
+
+- Posts each question with all four answer options shown in full.
+- Uses compact A–D voting buttons so long answers are not truncated.
+- Accepts one vote per participant and keeps results hidden until the reveal.
+- Marks correct answers and displays vote counts and percentages after reveal.
+- Supports scheduled daily posts as well as manual posting and revealing.
+
 ## Local setup
 
 1. Install Python 3.12.
@@ -22,6 +30,14 @@ per participant, and reveals all accepted answers with group statistics.
    ```
 
 Never commit `.env` or the SQLite database.
+
+## Tests
+
+Run the automated display and keyboard checks with:
+
+```powershell
+python -m unittest -v
+```
 
 ## Admin commands
 
